@@ -87,8 +87,8 @@ Streamlit application for interacting with the recommendation engine.
 Clone the repository:
 
 ```bash
-git clone https://github.com/AmirrG1/Machine-Learning-Project-Group2.git
-cd Machine-Learning-Project-Group2
+git clone https://github.com/AmirrG1/ecommerce-recommendation-engine.git
+cd Ecommerce-Recommendation-Engine
 ```
 
 Unzip the dataset:
