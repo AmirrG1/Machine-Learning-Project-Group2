@@ -1,85 +1,144 @@
-# E-Commerce Recommendation Engine (Machine Learning Project)
+# E-Commerce Recommendation Engine
 
-This repository contains our EECE454 Machine Learning course project.  
-We build a **Top-K recommendation engine** for an e-commerce website using **Logistic Regression** (no neural networks).
+A machine learning recommendation system that ranks e-commerce items for users based on historical user–item interactions. The project treats recommendation as a binary classification problem and uses Logistic Regression to predict whether a user is likely to interact positively with an item.
 
----
+## Project Overview
 
-## Files
+This project builds a **Top-K recommendation engine** for an e-commerce dataset using Python and Scikit-learn. The model predicts the probability of a positive interaction between a user and an item, then ranks items to generate recommendations.
 
-- `E-Commerce Recommendation Engine - ML - FINAL.ipynb`  
-  Final Jupyter notebook with all preprocessing, model training, and evaluation.
+Positive interactions are defined as:
 
-- `events.zip`  
-  Compressed version of the dataset (`events.csv`). Unzip it in this folder before running the notebook or app.
+* `addtocart`
+* `transaction`
 
-- `app.py`  
-  Streamlit app that lets you interact with the recommender.
+Negative interactions are defined as:
 
----
+* `view`
+
+## Key Results
+
+* **Precision@10:** 0.64
+* **Recall@10:** 0.98
+* Built a complete ML pipeline covering preprocessing, user/item filtering, negative sampling, model training, evaluation, and interactive deployment through Streamlit.
+
+## Tech Stack
+
+* Python
+* Pandas
+* NumPy
+* Scikit-learn
+* Logistic Regression
+* OneHotEncoder
+* Streamlit
+* Jupyter Notebook
 
 ## Dataset
 
-The dataset (`events.csv`) contains user–item interactions with columns:
+The dataset contains user–item event interactions with the following columns:
 
-- `timestamp`
-- `visitorid`
-- `event` (`view`, `addtocart`, `transaction`)
-- `itemid`
-- `transactionid`
+* `timestamp`
+* `visitorid`
+* `event`
+* `itemid`
+* `transactionid`
 
-We create a binary label:
+A binary label was created:
 
-- `rating = 1` for `addtocart` or `transaction`
-- `rating = 0` for `view`
+* `rating = 1` for `addtocart` or `transaction`
+* `rating = 0` for `view`
 
-We then filter cold users/items and do user-aware negative sampling to get a more balanced training set.
+To improve training quality, cold users/items were filtered and user-aware negative sampling was applied to create a more balanced dataset.
 
----
+## Model Approach
 
-## Model
+The recommendation problem was treated as a binary classification task:
 
-We treat recommendation as a **binary classification** problem:
+> Will this user have a positive interaction with this item?
 
-> Will this user have a positive interaction with this item (1) or not (0)?
+The pipeline includes:
 
-Model:
+* One-hot encoding of user and item IDs
+* Logistic Regression with balanced class weights
+* Probability-based ranking of items
+* Top-K evaluation using Precision@10 and Recall@10
 
-- `OneHotEncoder(handle_unknown="ignore")` on user and item IDs  
-- `LogisticRegression(max_iter=1000, class_weight="balanced")`  
-- Wrapped in a scikit-learn `Pipeline`
+## Repository Files
 
-The model outputs a **probability**, which we use to **rank items** and compute metrics like **Precision@10** and **Recall@10**.
+```text
+E-Commerce Recommendation Engine - ML - FINAL.ipynb
+```
 
----
+Final Jupyter notebook containing preprocessing, model training, and evaluation.
 
-## How to Run the Notebook
+```text
+events.zip
+```
 
-1. Clone the repo:
-   git clone https://github.com/AmirrG1/Machine-Learning-Project-Group2.git
-   cd Machine-Learning-Project-Group2
+Compressed dataset file. Unzip it before running the notebook or app.
+
+```text
+app.py
+```
+
+Streamlit application for interacting with the recommendation engine.
+
+## How to Run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AmirrG1/Machine-Learning-Project-Group2.git
+cd Machine-Learning-Project-Group2
+```
+
 Unzip the dataset:
 
-unzip events.zip   # creates events.csv
-Launch Jupyter and open:
+```bash
+unzip events.zip
+```
 
+Install dependencies:
 
+```bash
+pip install pandas numpy scikit-learn streamlit
+```
+
+Run the notebook:
+
+```bash
+jupyter notebook
+```
+
+Open:
+
+```text
 E-Commerce Recommendation Engine - ML - FINAL.ipynb
+```
+
 Run all cells in order.
 
-How to Run the Streamlit App
-Install dependencies (example):
+Run the Streamlit app:
 
-
-pip install streamlit scikit-learn pandas numpy
-From the project folder:
-
-
+```bash
 streamlit run app.py
-Open the local URL shown in the terminal (usually http://localhost:8501).
+```
 
-Group Members
-Amirali Tamizi Horzadeh (Github username: @AmirrG1) 2105035420
-Ahmad Alsayegh 2112036252
-Aly Mabrouk 2208037712
-Saeed Alshehhi 2108035865
+Open the local URL shown in the terminal, usually:
+
+```text
+http://localhost:8501
+```
+
+## What I Learned
+
+* Building an end-to-end machine learning pipeline
+* Preparing user–item interaction data for recommendation tasks
+* Applying negative sampling to improve training balance
+* Using Logistic Regression for ranking-based recommendation
+* Evaluating recommender systems with Precision@K and Recall@K
+* Deploying an interactive ML project using Streamlit
+
+## Author
+
+Amirali Tamizi Horzadeh
+GitHub: [@AmirrG1](https://github.com/AmirrG1)
