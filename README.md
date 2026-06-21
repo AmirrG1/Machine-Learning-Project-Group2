@@ -88,7 +88,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/AmirrG1/ecommerce-recommendation-engine.git
-cd Ecommerce-Recommendation-Engine
+cd ecommerce-recommendation-engine
 ```
 
 Unzip the dataset:
